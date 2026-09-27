@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Instant Play Mini Games
 
-## Getting Started
+A vibrant, ad-free landing site for a browser mini-games portal. Browse a curated collection of instant-play game cards (puzzles, racing, action, word, memory, strategy), explore feature highlights, and jump straight into gameplay — no downloads, no installs, no accounts.
 
-First, run the development server:
+**Built by Girish Lade** — https://ladestack.in
+
+## Features
+
+- **Game catalog cards** — Puzzle Master, Speed Racer, Space Shooter, Word Quest, Memory Match, Strategy King — each with artwork, category badge, and hover effects.
+- **Hero section** — full-width gradient hero with background imagery and call-to-action.
+- **Feature highlights** — Instant Play, 100% Free Forever, Ad-Free Experience, New Games Weekly.
+- **Stats & social proof section** — player counts and community metrics.
+- **How-it-works section** — pick a game, click play, enjoy.
+- **Testimonials** — player reviews carousel.
+- **FAQ accordion** — answers to common questions.
+- **Newsletter signup** — stay updated on new games.
+- **Footer** — site links and socials (GitHub, Instagram, Mail).
+- **Fully responsive** — mobile-first design, works on any screen size.
+- **Dark-mode ready** — theming support via next-themes.
+
+> Note: this repository is the portal's marketing landing page; the actual playable games live on the games platform itself.
+
+## Tech stack
+
+- Next.js 15 (App Router, static export), React 19, TypeScript
+- Tailwind CSS v4 + shadcn/ui component library (Radix primitives)
+- framer-motion — animations
+- lucide-react / @tabler/icons-react / @heroicons/react / react-icons — icon sets
+- embla-carousel, swiper — carousels
+- sonner — toast notifications
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000 (Turbopack)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build a production bundle:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build    # static export -> out/
+npm start        # serves the production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+instant-play-mini-games/
+├── src/
+│   ├── app/
+│   │   ├── page.tsx         # landing page: hero, games grid, features, FAQ, footer
+│   │   ├── layout.tsx       # root layout, fonts, metadata
+│   │   ├── globals.css      # Tailwind v4 theme + global styles
+│   │   └── global-error.tsx # global error boundary
+│   ├── components/
+│   │   ├── ui/              # shadcn/ui primitives (~50 components)
+│   │   └── ErrorReporter.tsx
+│   ├── hooks/use-mobile.ts  # responsive hook
+│   ├── lib/utils.ts         # class-name utilities
+│   └── visual-edits/        # visual editor integration (dev only)
+├── public/                  # static assets (SVG icons, favicon)
+├── next.config.ts           # static export + basePath config
+└── components.json          # shadcn/ui config
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Environment variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+None. Fully client-side landing page — no backend, no API keys, no database.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deployment
 
-## Deploy on Vercel
+Statically exported (`output: 'export'` in `next.config.ts`) — host the `out/` directory anywhere:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **GitHub Pages** (live): `out/` pushed to the `gh-pages` branch → https://girishlade111.github.io/instant-play-mini-games/
+- Any static host (Vercel, Netlify, Cloudflare Pages) works with `npm run build`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Note: `next.config.ts` sets `basePath: '/instant-play-mini-games'` for the GitHub Pages subpath. Remove `basePath` (and the `output: 'export'` override if you want SSR) when deploying to a root domain or Vercel.
+
+## Notes
+
+- Next.js bumped from 15.3.5 → 15.3.8 (patches CVE-2025-55182 React2Shell and related advisories).
+- Game artwork on the cards is loaded from Unsplash CDN; replace with local assets for a fully offline build.
+
+## Credit
+
+Built by Girish Lade — https://ladestack.in
